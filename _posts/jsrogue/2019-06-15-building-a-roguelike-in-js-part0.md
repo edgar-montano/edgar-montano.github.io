@@ -147,13 +147,13 @@ The easiest way to follow this series is by cloning the github repository for th
 We can do this by running the following commands in our terminal:
 
 ```
-git clone https://github.com/edgar-montano/jsrogue2.git
-cd jsrogue2
+git clone https://github.com/edgar-montano/jsroguelike
+cd jsroguelike
 rm -rf assets classes screenshots
 rm LICENSE README.md index.html
 ```
 
 The only files that should be remaining are the `lib` folder.
 
-After you finish this you can now proceed to actually **_coding your first Roguelike in JavaScript!_**
+After you finish this you can now proceed to actually [**_coding your first Roguelike in JavaScript!_**](/building-a-roguelike-in-js-part1/){:target="_blank"}
 

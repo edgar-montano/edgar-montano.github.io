@@ -1,4 +1,190 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-06-24T13:12:54-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Engineer Edgar</title><subtitle>I break, make, and fix stuff... Usually in that order. </subtitle><entry><title type="html">Building a Roguelike in Javascript 2019 - part 0</title><link href="http://localhost:4000/building-a-roguelike-in-js-part0/" rel="alternate" type="text/html" title="Building a Roguelike in Javascript 2019 - part 0" /><published>2019-06-15T13:37:00-04:00</published><updated>2019-06-15T13:37:00-04:00</updated><id>http://localhost:4000/building-a-roguelike-in-js-part0</id><content type="html" xml:base="http://localhost:4000/building-a-roguelike-in-js-part0/">&lt;h2 id=&quot;what-is-a-roguelike&quot;&gt;What is a Roguelike?&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-06-27T12:48:04-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Engineer Edgar</title><subtitle>I break, make, and fix stuff... Usually in that order. </subtitle><entry><title type="html">Building a Roguelike in JavaScript 2019 - part 1</title><link href="http://localhost:4000/building-a-roguelike-in-js-part1/" rel="alternate" type="text/html" title="Building a Roguelike in JavaScript 2019 - part 1" /><published>2019-06-25T13:37:00-04:00</published><updated>2019-06-25T13:37:00-04:00</updated><id>http://localhost:4000/building-a-roguelike-in-js-part1</id><content type="html" xml:base="http://localhost:4000/building-a-roguelike-in-js-part1/">&lt;h1 id=&quot;hello-rogue&quot;&gt;Hello, Rogue&lt;/h1&gt;
+
+&lt;p&gt;Nearly every introduction to a programming language or framework has a ‘Hello World’ application as its first step. This is to ensure that you have properly configured your development environment. Therefore this section will aim to guide you to print out your own ‘Hello, World’ message on screen.&lt;/p&gt;
+
+&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
+
+&lt;p&gt;In this part of the Roguelike in JavaScript series we will be reviewing the following topics:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#live_server&quot;&gt;Deployment with Live Server&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Shows how to serve index.html so we can make live edits to our application without the need of renting a server.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#hello_rogue&quot;&gt;Hello, Rogue - Printing to Display&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;The goal of this part is to simply display ‘Hello, World’ in a rot.js container on our screen.&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#importing_destructuring&quot;&gt;Imports and Destructuring&lt;/a&gt;
+        &lt;ul&gt;
+          &lt;li&gt;Talks about ES6 importing modules and destructuring them.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#options&quot;&gt;Let their be options&lt;/a&gt;
+        &lt;ul&gt;
+          &lt;li&gt;Discusses scopes of variables&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#classes&quot;&gt;Constructing a new Display&lt;/a&gt;
+        &lt;ul&gt;
+          &lt;li&gt;Refers to ES6 Classes, and the DOM&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#loops&quot;&gt;Looping and Printing in Color&lt;/a&gt;
+        &lt;ul&gt;
+          &lt;li&gt;Teaches how to loop and print values in rot.js&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#results&quot;&gt;Results&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#full_code&quot;&gt;Full Source Code&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you have yet to setup your development environment, I suggest reading the &lt;a href=&quot;http://localhost:4000/building-a-roguelike-in-js-part0/#how-to-follow-this-series&quot; target=&quot;_blank&quot;&gt;previous part of this series&lt;/a&gt; where I discuss how to setup VSCode and how to get the rot.js library.&lt;/p&gt;
+
+&lt;h1 id=&quot;live_server&quot;&gt;Getting Started - Serving up some HTML&lt;/h1&gt;
+
+&lt;p&gt;The first step will involve us with setting up Live Server, and properly serving our &lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt; file, after this we will start working on our &lt;code class=&quot;highlighter-rouge&quot;&gt;assets/main.js&lt;/code&gt; file which will be where we execute all our main JavaScript functions.&lt;/p&gt;
+
+&lt;p&gt;To get started open up VSCode and create a new file called &lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt; in the root folder of your project.  Inside our index.html will be the following code:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;jsroguelike - 2019&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;JavaScript Roguelike&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;module&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;assets/main.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Here we are simply just setting up our template HTML. If you don’t know HTML, then I highly recommend you &lt;a href=&quot;https://www.w3schools.com/html/default.asp&quot; target=&quot;_blank&quot;&gt;learn it&lt;/a&gt;, however knowing HTML is absolutely unnecessary for this series. The most important part of this, in fact the only part that matters is the &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;script&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt; tag. This is where we are loading our &lt;code class=&quot;highlighter-rouge&quot;&gt;main.js&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;p&gt;In order for us to see what’s going on, we need to load up a local server and serve our &lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt;. In this case we’ll be using the &lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer&quot; target=&quot;_blank&quot;&gt;Live Server&lt;/a&gt; extension provided by &lt;a href=&quot;https://code.visualstudio.com/&quot; target=&quot;_blank&quot;&gt;VSCode&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To start Live Server simply right click on our &lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt; in VSCode, and click &lt;strong&gt;Open with Live Server&lt;/strong&gt;. After that navigate to your web browser and enter the URL &lt;code class=&quot;highlighter-rouge&quot;&gt;localhost:5500&lt;/code&gt;. This is the default location Live Server starts up. You should see a JavaScript Roguelike header appear. However we have yet to make the &lt;code class=&quot;highlighter-rouge&quot;&gt;assets/main.js&lt;/code&gt; file so if we look at our console in our browser we will see an error &lt;code class=&quot;highlighter-rouge&quot;&gt;failed to load resource assets/main.js&lt;/code&gt;. For Chrome users you can use the shortcut &lt;strong&gt;Control+Shift+I&lt;/strong&gt; to pull up the console to see this message.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/blog/roguelikedev/running-live-server.gif&quot; alt=&quot;Serving our index.html with live server&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;hello_rogue&quot;&gt;Hello, Rogue - Printing to the display&lt;/h1&gt;
+
+&lt;p&gt;In this section we will finally start writing in JavaScript. To start make a folder called &lt;code class=&quot;highlighter-rouge&quot;&gt;assets&lt;/code&gt; and inside that folder a file called &lt;code class=&quot;highlighter-rouge&quot;&gt;main.js&lt;/code&gt;. The point of creating an assets folder is to structure our code and organize it better, you can name the folder anything you want, however for the purpose of this tutorial we will be naming the folder assets.&lt;/p&gt;
+
+&lt;p&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;assets/main.js&lt;/code&gt; we will start off by importing rot.js library. &lt;em&gt;_For this to work you must have followed the previous guide’s section about &lt;a href=&quot;/building-a-roguelike-in-js-part0/#how-to-follow-this-series&quot; target=&quot;_blank&quot;&gt;obtaining the lib folder in our project&lt;/a&gt;._&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;We will start off by simply importing the rot.js library to our project. This gives us all the functionality rot.js has to offer. Furthermore we destructure Color, and Display from the rot.js namespace so we can simply type less, and for our code to be more readable.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import {Color, Display} from '../lib/index.js'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;importing_destructuring&quot;&gt;Importing and Destructuring (Optional Read)&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import&quot; target=&quot;_blank&quot;&gt;Import&lt;/a&gt; is the way of JavaScript to include other modules exported from libraries into our file. In this case we are importing the rot.js library into our file.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment&quot; target=&quot;_blank&quot;&gt;Destructuring&lt;/a&gt; is an easy way of unpacking values from an object. In this case we destructure &lt;code class=&quot;highlighter-rouge&quot;&gt;Color&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Display&lt;/code&gt; from the rot.js library. Without this, everytime we need to call upon either the Color or Display object, we would need to write: &lt;code class=&quot;highlighter-rouge&quot;&gt;ROT.Color()&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;ROT.Display()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;These are two ES6 features that make our lives slightly easier, and we’ll occasionally use them throughout the series, so understanding what it means will be helpful.&lt;/p&gt;
+
+&lt;h2 id=&quot;options&quot;&gt;Let their be options&lt;/h2&gt;
+
+&lt;p&gt;The next line of code in &lt;code class=&quot;highlighter-rouge&quot;&gt;assets/main.js&lt;/code&gt; will be an optional object we will create to pass into our Display &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor&quot; target=&quot;_blank&quot;&gt;constructor&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let options = { 
+	width: 80,
+	height: 24
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The keyword &lt;code class=&quot;highlighter-rouge&quot;&gt;let&lt;/code&gt; is a huge improvement from the previous &lt;a href=&quot;http://www.codingcookies.com/2013/04/01/building-a-roguelike-in-javascript-part-1/&quot; target=&quot;_blank&quot;&gt;tutorial&lt;/a&gt;.  &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let&quot; target=&quot;_blank&quot;&gt;Let&lt;/a&gt; declares a block scope local variable, opposed to the previous way of creating variables in JavaScript: &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var&quot; target=&quot;_blank&quot;&gt;var&lt;/a&gt; which declares variables in the global scope.&lt;/p&gt;
+
+&lt;p&gt;Previously if we defined our &lt;strong&gt;options&lt;/strong&gt; variable with &lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt; instead of &lt;code class=&quot;highlighter-rouge&quot;&gt;let&lt;/code&gt;, and we decided to make another &lt;strong&gt;options&lt;/strong&gt; variable in another file, their would be a conflict between those variables, and it’s possible that an entirely different file can affect our current options object. In general, using global scope variables is a bad idea and should be avoided as much as possible. With the introduction of &lt;code class=&quot;highlighter-rouge&quot;&gt;let&lt;/code&gt; we can limit the scope of our variable to whatever block of code it is in, in this case, it is only limited to the &lt;code class=&quot;highlighter-rouge&quot;&gt;assets/main.js&lt;/code&gt; file and no other file in our project, which is what we want.&lt;/p&gt;
+
+&lt;h2 id=&quot;classes&quot;&gt;Constructing a new Display&lt;/h2&gt;
+
+&lt;p&gt;We will finally initialize our &lt;code class=&quot;highlighter-rouge&quot;&gt;Display&lt;/code&gt; class. This is where the meat of our application will reside in. The &lt;code class=&quot;highlighter-rouge&quot;&gt;Display&lt;/code&gt; class will be used to print to the screen.&lt;/p&gt;
+
+&lt;p&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;assets/main.js&lt;/code&gt; our next line of code is simple:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let display = new Display(options);
+document.body.append(display.getContainer());
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;rot.js provides us with a canvas-based output that is suppose to resemble traditional TTY terminal. This output is our &lt;code class=&quot;highlighter-rouge&quot;&gt;display&lt;/code&gt; class. The first line &lt;code class=&quot;highlighter-rouge&quot;&gt;let display = new Display(...);&lt;/code&gt; initializes a class called &lt;code class=&quot;highlighter-rouge&quot;&gt;display&lt;/code&gt;, by passing in the &lt;code class=&quot;highlighter-rouge&quot;&gt;options&lt;/code&gt; object we created to the constructor of rot.js’s Display class… wow that was a mouthful. Essentially what we did was initialize a &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes&quot; target=&quot;_blank&quot;&gt;JavaScript class&lt;/a&gt;, a class is simply a paradigm of &lt;a href=&quot;https://www.webopedia.com/TERM/O/object_oriented_programming_OOP.html&quot; target=&quot;_blank&quot;&gt;Object-Oriented Programming&lt;/a&gt; that allows us to structure our data into a more coherent object that can perform actions and retain values. In essence, it’s a collection of objects, functions, and variables.&lt;/p&gt;
+
+&lt;p&gt;rot.js provides a &lt;a href=&quot;https://ondras.github.io/rot.js/manual/#display&quot; target=&quot;_blank&quot;&gt;Display class&lt;/a&gt; that can take in an object that specifies options. These options are passed in through a constructor. A &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor&quot; target=&quot;_blank&quot;&gt;constructor&lt;/a&gt; basically is called when you first create a class with the &lt;code class=&quot;highlighter-rouge&quot;&gt;new&lt;/code&gt; keyword.&lt;/p&gt;
+
+&lt;p&gt;The next line has to do with the Document Object Model, or DOM for short. &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction&quot; target=&quot;_blank&quot;&gt;The DOM is the programming interface for HTML documents&lt;/a&gt;. The DOM has to do with how your HTML document is formatted and displayed. &lt;code class=&quot;highlighter-rouge&quot;&gt;document.body.append(display.getContainer())&lt;/code&gt; is simply calling the class method &lt;code class=&quot;highlighter-rouge&quot;&gt;display.getContainer()&lt;/code&gt; which returns a DOM node of the display element. This element is then appended to the body of our &lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt;. This is how we can display our application. If we did not append the container to the body of our &lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt; then our Roguelike game will &lt;strong&gt;never&lt;/strong&gt; display.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;_Note since we destructure we do not have to write &lt;code class=&quot;highlighter-rouge&quot;&gt;let display = new ROT.Display(...);&lt;/code&gt; instead we simply write &lt;code class=&quot;highlighter-rouge&quot;&gt;let display = new Display(...);&lt;/code&gt;_&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;loops&quot;&gt;Looping and Printing in Color&lt;/h2&gt;
+
+&lt;p&gt;Below appending our display value into the DOM, we will now finally print our message to the screen. How exciting, 6 minutes into this article and we finally get to the part that matters. 😳&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let foreground, background, colors, x;
+for (let i = 0; i &amp;lt; 15; i++) {
+  x = i * 20;
+  foreground = Color.toRGB([255 - x, 255 - x, 255 - x]);
+  background = Color.toRGB([x, x, x]);
+  colors = &quot;%c{&quot; + foreground + &quot;}%b{&quot; + background + &quot;}&quot;;
+  display.drawText(2, i, colors + &quot;Hello, Rogue!&quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;First we start off by initializing the &lt;code class=&quot;highlighter-rouge&quot;&gt;foreground&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;background&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;colors&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;x&lt;/code&gt; value. Currently if you tried accessing these values immediately after the first line, you’ll get a not defined value, this is because we haven’t assigned the value to anything yet, we simply initialized it. The reason behind this is because we do not want to continuously initialize the values within the loop, each time the loop is called if we had an initialization statement within the loop, we’ll constantly be re-initializing the code, which is a waste of memory.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://www.w3schools.com/js/js_loop_for.asp&quot; target=&quot;_blank&quot;&gt;for loop&lt;/a&gt; simply just loops everything inside the curly braces 15 times.&lt;/p&gt;
+
+&lt;p&gt;The following lines where we set &lt;code class=&quot;highlighter-rouge&quot;&gt;foreground&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;background&lt;/code&gt; involves RGB calculations which revolve around a Red Green Blue color system. The idea is the foreground will start light, with RGB values of 255,255,255, and the background starts off dark, with a RGB value of 0,0,0. As the program loops over, the values slowly decrease for the foreground, meaning it gets darker over each iteration, while the inverse is true for the background, it gets lighter over each iteration.&lt;/p&gt;
+
+&lt;p&gt;Next we set these values to a &lt;code class=&quot;highlighter-rouge&quot;&gt;colors&lt;/code&gt; string, which colors our text according to the specified foreground and background.&lt;/p&gt;
+
+&lt;p&gt;Finally, and the most important aspect of our code, we finally use &lt;code class=&quot;highlighter-rouge&quot;&gt;display.drawText()&lt;/code&gt; to write to the screen. This function should be fairly self-explanatory, it draws text to the display, in this case, we are drawing the string ‘Hello, Rogue’ with varying colors to the display.&lt;/p&gt;
+
+&lt;h1 id=&quot;results&quot;&gt;Results&lt;/h1&gt;
+
+&lt;p&gt;And finally, visiting the browser we can see our ‘Hello, World’ being displayed. (Note yours should say ‘Hello, Rogue’)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/blog/roguelikedev/part-1-hello-rogue.png&quot; alt=&quot;Making your own Roguelike in JavaScript - Part 1&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;full_code&quot;&gt;Full Code&lt;/h1&gt;
+
+&lt;h4 id=&quot;indexhtml&quot;&gt;index.html&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;jsroguelike - 2019&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;JavaScript Roguelike&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;module&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;assets/main.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;assetsmainjs&quot;&gt;assets/main.js&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import { Color, Display } from &quot;../lib/index.js&quot;;
+
+let options = {
+  width: 80,
+  height: 20
+};
+
+let display = new Display(options);
+document.body.append(display.getContainer());
+
+let foreground, background, colors, x;
+for (let i = 0; i &amp;lt; 15; i++) {
+  x = i * 20;
+  foreground = Color.toRGB([255 - x, 255 - x, 255 - x]);
+
+  background = Color.toRGB([x, x, x]);
+
+  colors = &quot;%c{&quot; + foreground + &quot;}%b{&quot; + background + &quot;}&quot;;
+
+  display.drawText(2, i, colors + &quot;Hello, Rogue!&quot;);
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>edgarmontano</name></author><category term="javascript" /><category term="roguelike" /><category term="rot.js" /><category term="programming" /><category term="featured" /><summary type="html">Hello, Rogue</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/images/blog/roguelikedev/roguelikedev.png" /></entry><entry><title type="html">Building a Roguelike in Javascript 2019 - part 0</title><link href="http://localhost:4000/building-a-roguelike-in-js-part0/" rel="alternate" type="text/html" title="Building a Roguelike in Javascript 2019 - part 0" /><published>2019-06-15T13:37:00-04:00</published><updated>2019-06-15T13:37:00-04:00</updated><id>http://localhost:4000/building-a-roguelike-in-js-part0</id><content type="html" xml:base="http://localhost:4000/building-a-roguelike-in-js-part0/">&lt;h2 id=&quot;what-is-a-roguelike&quot;&gt;What is a Roguelike?&lt;/h2&gt;
 
 &lt;p&gt;Before we start this article I would like to clarify what a Roguelike is for those who do not know.&lt;/p&gt;
 
@@ -142,15 +328,15 @@ makepkg -si
 
 &lt;p&gt;We can do this by running the following commands in our terminal:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/edgar-montano/jsrogue2.git
-cd jsrogue2
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/edgar-montano/jsroguelike
+cd jsroguelike
 rm -rf assets classes screenshots
 rm LICENSE README.md index.html
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;The only files that should be remaining are the &lt;code class=&quot;highlighter-rouge&quot;&gt;lib&lt;/code&gt; folder.&lt;/p&gt;
 
-&lt;p&gt;After you finish this you can now proceed to actually &lt;strong&gt;&lt;em&gt;coding your first Roguelike in JavaScript!&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;</content><author><name>edgarmontano</name></author><category term="javascript" /><category term="roguelike" /><category term="rot.js" /><category term="programming" /><category term="featured" /><summary type="html">What is a Roguelike?</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/images/blog/roguelikedev/roguelikedev.png" /></entry><entry><title type="html">About Me</title><link href="http://localhost:4000/about-me/" rel="alternate" type="text/html" title="About Me" /><published>2019-01-01T00:00:00-05:00</published><updated>2019-01-01T00:00:00-05:00</updated><id>http://localhost:4000/about-me</id><content type="html" xml:base="http://localhost:4000/about-me/">&lt;p&gt;Audio Engineer, Software Engineer, and Linux Enthusiast.&lt;/p&gt;
+&lt;p&gt;After you finish this you can now proceed to actually &lt;a href=&quot;/building-a-roguelike-in-js-part1/&quot; target=&quot;_blank&quot;&gt;&lt;strong&gt;&lt;em&gt;coding your first Roguelike in JavaScript!&lt;/em&gt;&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;</content><author><name>edgarmontano</name></author><category term="javascript" /><category term="roguelike" /><category term="rot.js" /><category term="programming" /><category term="featured" /><summary type="html">What is a Roguelike?</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/images/blog/roguelikedev/roguelikedev.png" /></entry><entry><title type="html">About Me</title><link href="http://localhost:4000/about-me/" rel="alternate" type="text/html" title="About Me" /><published>2019-01-01T00:00:00-05:00</published><updated>2019-01-01T00:00:00-05:00</updated><id>http://localhost:4000/about-me</id><content type="html" xml:base="http://localhost:4000/about-me/">&lt;p&gt;Audio Engineer, Software Engineer, and Linux Enthusiast.&lt;/p&gt;
 
 &lt;p&gt;Programming has drastically changed my life. It cultivated the way I think, enhanced the way I approach problems, and gave meaning to my life. &lt;/p&gt;
 

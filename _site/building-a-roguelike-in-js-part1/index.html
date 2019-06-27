@@ -4,22 +4,26 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
         <meta content="ie=edge" http-equiv="X-UA-Compatible">
-        <title>Categories
+        <title>Building a Roguelike in JavaScript 2019 - part 1
             |
             Engineer Edgar</title>
 
         <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Categories | Engineer Edgar</title>
+<title>Building a Roguelike in JavaScript 2019 - part 1 | Engineer Edgar</title>
 <meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="Categories" />
+<meta property="og:title" content="Building a Roguelike in JavaScript 2019 - part 1" />
+<meta name="author" content="edgarmontano" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="I break, make, and fix stuff… Usually in that order." />
-<meta property="og:description" content="I break, make, and fix stuff… Usually in that order." />
-<link rel="canonical" href="http://localhost:4000/categories.html" />
-<meta property="og:url" content="http://localhost:4000/categories.html" />
+<meta name="description" content="Building a Roguelike in JavaScript 2019 - part 1, Hello, Rogue! Setting up rot.js, the first step in programming your own Roguelike!" />
+<meta property="og:description" content="Building a Roguelike in JavaScript 2019 - part 1, Hello, Rogue! Setting up rot.js, the first step in programming your own Roguelike!" />
+<link rel="canonical" href="http://localhost:4000/building-a-roguelike-in-js-part1/" />
+<meta property="og:url" content="http://localhost:4000/building-a-roguelike-in-js-part1/" />
 <meta property="og:site_name" content="Engineer Edgar" />
+<meta property="og:image" content="http://localhost:4000/assets/images/blog/roguelikedev/roguelikedev.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-06-25T13:37:00-04:00" />
 <script type="application/ld+json">
-{"@type":"WebPage","url":"http://localhost:4000/categories.html","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/images/logo.png"}},"headline":"Categories","description":"I break, make, and fix stuff… Usually in that order.","@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/building-a-roguelike-in-js-part1/"},"@type":"BlogPosting","url":"http://localhost:4000/building-a-roguelike-in-js-part1/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/images/logo.png"},"name":"edgarmontano"},"headline":"Building a Roguelike in JavaScript 2019 - part 1","dateModified":"2019-06-25T13:37:00-04:00","datePublished":"2019-06-25T13:37:00-04:00","author":{"@type":"Person","name":"edgarmontano"},"image":"http://localhost:4000/assets/images/blog/roguelikedev/roguelikedev.png","description":"Building a Roguelike in JavaScript 2019 - part 1, Hello, Rogue! Setting up rot.js, the first step in programming your own Roguelike!","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -117,12 +121,12 @@ var documents = [{
     "id": 2,
     "url": "http://localhost:4000/authors-list.html",
     "title": "Authors",
-    "body": "   Authors :                                               Edgar Montano:        (About Me)       Audio Engineer, Software Engineer, and Linux Enthusiast.                                    &nbsp;                &nbsp;                              "
+    "body": "   {{ page. title }} :    {% for author in site. authors %}                                           {{ author[1]. name }}:        (About Me)       {{ author[1]. bio }}                                   &nbsp;                &nbsp;                             {% endfor %} "
     }, {
     "id": 3,
     "url": "http://localhost:4000/categories.html",
     "title": "Categories",
-    "body": "          Categories               About:                                  		About Me	: 		  Audio Engineer, Software Engineer, and Linux Enthusiast. 	 			In 				About, 				Me, 								Jan 01, 2019						                              Me:                                  		About Me	: 		  Audio Engineer, Software Engineer, and Linux Enthusiast. 	 			In 				About, 				Me, 								Jan 01, 2019						                              javascript:                                  		Building a Roguelike in JavaScript 2019 - part 1	: 		  Hello, Rogue	 			In 				javascript, 				programming, 								Jun 25, 2019						                                 		Building a Roguelike in Javascript 2019 - part 0	: 		  What is a Roguelike?	 			In 				javascript, 				programming, 								Jun 15, 2019						                              programming:                                  		Building a Roguelike in JavaScript 2019 - part 1	: 		  Hello, Rogue	 			In 				javascript, 				programming, 								Jun 25, 2019						                                 		Building a Roguelike in Javascript 2019 - part 0	: 		  What is a Roguelike?	 			In 				javascript, 				programming, 								Jun 15, 2019						                                             Featured:    				                                          Building a Roguelike in JavaScript 2019 - part 1                          In                     javascript,                     programming,                                                                                           Building a Roguelike in Javascript 2019 - part 0                          In                     javascript,                     programming,                                                                   "
+    "body": "          Categories          {% for category in site. categories %}     {{ category[0] }}:           {% assign pages_list = category[1] %}    {% for post in pages_list %}    {% if post. title != null %}     {% if group == null or group == post. group %}           {% include main-loop-card. html %}     {% endif %}    {% endif %}    {% endfor %}    {% assign pages_list = nil %}    {% assign group = nil %}    {% endfor %}                  {% include sidebar-featured. html %}          "
     }, {
     "id": 4,
     "url": "http://localhost:4000/contact.html",
@@ -230,302 +234,372 @@ function lunr_search(term) {
 
         <!-- Content -->
         <main class="site-content" role="main">
-            <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-        <h1 class="font-weight-bold title h6 text-uppercase mb-4">Categories</h1>
             
-         
-        <h4 class="font-weight-bold spanborder text-capitalize" id="about"><span>About</span></h4>
+<div class="container">
+<div class="jumbotron jumbotron-fluid mb-3 pl-0 pt-0 pb-0 bg-white position-relative">
+		<div class="h-100 tofront">
+			<div class="row  justify-content-between ">
+				<div class=" col-md-6  pr-0 pr-md-4 pt-4 pb-4 align-self-center">
+					<p class="text-uppercase font-weight-bold">
+                        <span class="catlist">
+						
+                          <a class="sscroll text-danger" href="/categories.html#javascript">javascript</a><span class="sep">, </span>
+                        
+                          <a class="sscroll text-danger" href="/categories.html#programming">programming</a><span class="sep">, </span>
+                        
+                        </span>
+					</p>
+					<h1 class="display-4 mb-4 article-headline">Building a Roguelike in JavaScript 2019 - part 1</h1>
+					<div class="d-flex align-items-center">
+                        
+                        <img class="rounded-circle" src="/assets/images/avatar1.jpg" alt="Edgar Montano" width="70"/>
+                        
+						<small class="ml-3"> Edgar Montano <span><a target="_blank" href="https://twitter.com/EngineerEdgar" class="btn btn-outline-success btn-sm btn-round ml-1">Follow</a></span>
+                            <span class="text-muted d-block mt-1">Jun 25, 2019 · <span class="reading-time">
+  
+  
+    10 mins read
+  
+</span>
+    </span>
+						</small>
+					</div>
+				</div>
+                
+				<div class="col-md-6 pr-0 align-self-center">
+					<img class="rounded" src="/assets/images/blog/roguelikedev/roguelikedev.png" alt="Building a Roguelike in JavaScript 2019 - part 1">
+				</div>
+                
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+<div class="container-lg pt-4 pb-4">
+	<div class="row justify-content-center">
+        
+        
+        <!-- Share -->
+		<div class="col-lg-2 pr-4 mb-4 col-md-12">
+			<div class="sticky-top sticky-top-offset text-center">
+				<div class="text-muted">
+					Share this
+				</div>
+				<div class="share d-inline-block">
+					<!-- AddToAny BEGIN -->
+					<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+						<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+						<a class="a2a_button_facebook"></a>
+						<a class="a2a_button_twitter"></a>
+					</div>
+					<script async src="https://static.addtoany.com/menu/page.js"></script>
+					<!-- AddToAny END -->
+				</div>
+			</div>
+		</div>
+        
+        
+		<div class="col-md-12 col-lg-8">
             
-        
-        
-        
-          
-         
-            <div class="mb-5 d-flex justify-content-between main-loop-card">
-<div class="pr-3">
-	<h2 class="mb-1 h4 font-weight-bold">
-	<a class="text-dark" href="/about-me/">About Me</a>
-	</h2>
-	<p class="excerpt">
-	   Audio Engineer, Software Engineer, and Linux Enthusiast.
-	</p>
-	<small class="d-block text-muted">
-		In <span class="catlist">
-		
-		<a class="text-capitalize text-muted smoothscroll" href="/categories.html#about">About</a><span class="sep">, </span>
-		
-		<a class="text-capitalize text-muted smoothscroll" href="/categories.html#me">Me</a><span class="sep">, </span>
-		
-		</span>
-	</small>
-	<small class="text-muted">
-		Jan 01, 2019
-	</small>
-</div>
+            <!-- Article -->
+			<article class="article-post">                
+			<h1 id="hello-rogue">Hello, Rogue</h1>
 
-	<div class="col-md-3 pr-0 text-right">
-	<a href="/about-me/">
-	<img class="w-100" src="/assets/images/iheartcoding.jpg" alt="About Me">
-	</a>
-	</div>
+<p>Nearly every introduction to a programming language or framework has a ‘Hello World’ application as its first step. This is to ensure that you have properly configured your development environment. Therefore this section will aim to guide you to print out your own ‘Hello, World’ message on screen.</p>
 
-</div>
-          
-        
-        
-        
-        
+<h2 id="overview">Overview</h2>
 
-         
-        <h4 class="font-weight-bold spanborder text-capitalize" id="me"><span>Me</span></h4>
+<p>In this part of the Roguelike in JavaScript series we will be reviewing the following topics:</p>
+<ul>
+  <li><a href="#live_server">Deployment with Live Server</a>
+    <ul>
+      <li>Shows how to serve index.html so we can make live edits to our application without the need of renting a server.</li>
+    </ul>
+  </li>
+  <li><a href="#hello_rogue">Hello, Rogue - Printing to Display</a>
+    <ul>
+      <li>The goal of this part is to simply display ‘Hello, World’ in a rot.js container on our screen.</li>
+      <li><a href="#importing_destructuring">Imports and Destructuring</a>
+        <ul>
+          <li>Talks about ES6 importing modules and destructuring them.</li>
+        </ul>
+      </li>
+      <li><a href="#options">Let their be options</a>
+        <ul>
+          <li>Discusses scopes of variables</li>
+        </ul>
+      </li>
+      <li><a href="#classes">Constructing a new Display</a>
+        <ul>
+          <li>Refers to ES6 Classes, and the DOM</li>
+        </ul>
+      </li>
+      <li><a href="#loops">Looping and Printing in Color</a>
+        <ul>
+          <li>Teaches how to loop and print values in rot.js</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#results">Results</a></li>
+  <li><a href="#full_code">Full Source Code</a></li>
+</ul>
+
+<p>If you have yet to setup your development environment, I suggest reading the <a href="http://localhost:4000/building-a-roguelike-in-js-part0/#how-to-follow-this-series" target="_blank">previous part of this series</a> where I discuss how to setup VSCode and how to get the rot.js library.</p>
+
+<h1 id="live_server">Getting Started - Serving up some HTML</h1>
+
+<p>The first step will involve us with setting up Live Server, and properly serving our <code class="highlighter-rouge">index.html</code> file, after this we will start working on our <code class="highlighter-rouge">assets/main.js</code> file which will be where we execute all our main JavaScript functions.</p>
+
+<p>To get started open up VSCode and create a new file called <code class="highlighter-rouge">index.html</code> in the root folder of your project.  Inside our index.html will be the following code:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;title&gt;</span>jsroguelike - 2019<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;h1&gt;</span>JavaScript Roguelike<span class="nt">&lt;/h1&gt;</span>
+	<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"module"</span> <span class="na">src=</span><span class="s">"assets/main.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>Here we are simply just setting up our template HTML. If you don’t know HTML, then I highly recommend you <a href="https://www.w3schools.com/html/default.asp" target="_blank">learn it</a>, however knowing HTML is absolutely unnecessary for this series. The most important part of this, in fact the only part that matters is the <code class="highlighter-rouge">&lt;script&gt;&lt;/script&gt;</code> tag. This is where we are loading our <code class="highlighter-rouge">main.js</code> file.</p>
+
+<p>In order for us to see what’s going on, we need to load up a local server and serve our <code class="highlighter-rouge">index.html</code>. In this case we’ll be using the <a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer" target="_blank">Live Server</a> extension provided by <a href="https://code.visualstudio.com/" target="_blank">VSCode</a>.</p>
+
+<p>To start Live Server simply right click on our <code class="highlighter-rouge">index.html</code> in VSCode, and click <strong>Open with Live Server</strong>. After that navigate to your web browser and enter the URL <code class="highlighter-rouge">localhost:5500</code>. This is the default location Live Server starts up. You should see a JavaScript Roguelike header appear. However we have yet to make the <code class="highlighter-rouge">assets/main.js</code> file so if we look at our console in our browser we will see an error <code class="highlighter-rouge">failed to load resource assets/main.js</code>. For Chrome users you can use the shortcut <strong>Control+Shift+I</strong> to pull up the console to see this message.</p>
+
+<p><img src="/assets/images/blog/roguelikedev/running-live-server.gif" alt="Serving our index.html with live server" /></p>
+
+<h1 id="hello_rogue">Hello, Rogue - Printing to the display</h1>
+
+<p>In this section we will finally start writing in JavaScript. To start make a folder called <code class="highlighter-rouge">assets</code> and inside that folder a file called <code class="highlighter-rouge">main.js</code>. The point of creating an assets folder is to structure our code and organize it better, you can name the folder anything you want, however for the purpose of this tutorial we will be naming the folder assets.</p>
+
+<p>In <code class="highlighter-rouge">assets/main.js</code> we will start off by importing rot.js library. <em>_For this to work you must have followed the previous guide’s section about <a href="/building-a-roguelike-in-js-part0/#how-to-follow-this-series" target="_blank">obtaining the lib folder in our project</a>._</em></p>
+
+<p>We will start off by simply importing the rot.js library to our project. This gives us all the functionality rot.js has to offer. Furthermore we destructure Color, and Display from the rot.js namespace so we can simply type less, and for our code to be more readable.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import {Color, Display} from '../lib/index.js'
+</code></pre></div></div>
+
+<h2 id="importing_destructuring">Importing and Destructuring (Optional Read)</h2>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import" target="_blank">Import</a> is the way of JavaScript to include other modules exported from libraries into our file. In this case we are importing the rot.js library into our file.</p>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment" target="_blank">Destructuring</a> is an easy way of unpacking values from an object. In this case we destructure <code class="highlighter-rouge">Color</code> and <code class="highlighter-rouge">Display</code> from the rot.js library. Without this, everytime we need to call upon either the Color or Display object, we would need to write: <code class="highlighter-rouge">ROT.Color()</code> or <code class="highlighter-rouge">ROT.Display()</code>.</p>
+
+<p>These are two ES6 features that make our lives slightly easier, and we’ll occasionally use them throughout the series, so understanding what it means will be helpful.</p>
+
+<h2 id="options">Let their be options</h2>
+
+<p>The next line of code in <code class="highlighter-rouge">assets/main.js</code> will be an optional object we will create to pass into our Display <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor" target="_blank">constructor</a>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let options = { 
+	width: 80,
+	height: 24
+};
+</code></pre></div></div>
+
+<p>The keyword <code class="highlighter-rouge">let</code> is a huge improvement from the previous <a href="http://www.codingcookies.com/2013/04/01/building-a-roguelike-in-javascript-part-1/" target="_blank">tutorial</a>.  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let" target="_blank">Let</a> declares a block scope local variable, opposed to the previous way of creating variables in JavaScript: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var" target="_blank">var</a> which declares variables in the global scope.</p>
+
+<p>Previously if we defined our <strong>options</strong> variable with <code class="highlighter-rouge">var</code> instead of <code class="highlighter-rouge">let</code>, and we decided to make another <strong>options</strong> variable in another file, their would be a conflict between those variables, and it’s possible that an entirely different file can affect our current options object. In general, using global scope variables is a bad idea and should be avoided as much as possible. With the introduction of <code class="highlighter-rouge">let</code> we can limit the scope of our variable to whatever block of code it is in, in this case, it is only limited to the <code class="highlighter-rouge">assets/main.js</code> file and no other file in our project, which is what we want.</p>
+
+<h2 id="classes">Constructing a new Display</h2>
+
+<p>We will finally initialize our <code class="highlighter-rouge">Display</code> class. This is where the meat of our application will reside in. The <code class="highlighter-rouge">Display</code> class will be used to print to the screen.</p>
+
+<p>In <code class="highlighter-rouge">assets/main.js</code> our next line of code is simple:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let display = new Display(options);
+document.body.append(display.getContainer());
+</code></pre></div></div>
+
+<p>rot.js provides us with a canvas-based output that is suppose to resemble traditional TTY terminal. This output is our <code class="highlighter-rouge">display</code> class. The first line <code class="highlighter-rouge">let display = new Display(...);</code> initializes a class called <code class="highlighter-rouge">display</code>, by passing in the <code class="highlighter-rouge">options</code> object we created to the constructor of rot.js’s Display class… wow that was a mouthful. Essentially what we did was initialize a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes" target="_blank">JavaScript class</a>, a class is simply a paradigm of <a href="https://www.webopedia.com/TERM/O/object_oriented_programming_OOP.html" target="_blank">Object-Oriented Programming</a> that allows us to structure our data into a more coherent object that can perform actions and retain values. In essence, it’s a collection of objects, functions, and variables.</p>
+
+<p>rot.js provides a <a href="https://ondras.github.io/rot.js/manual/#display" target="_blank">Display class</a> that can take in an object that specifies options. These options are passed in through a constructor. A <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor" target="_blank">constructor</a> basically is called when you first create a class with the <code class="highlighter-rouge">new</code> keyword.</p>
+
+<p>The next line has to do with the Document Object Model, or DOM for short. <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction" target="_blank">The DOM is the programming interface for HTML documents</a>. The DOM has to do with how your HTML document is formatted and displayed. <code class="highlighter-rouge">document.body.append(display.getContainer())</code> is simply calling the class method <code class="highlighter-rouge">display.getContainer()</code> which returns a DOM node of the display element. This element is then appended to the body of our <code class="highlighter-rouge">index.html</code>. This is how we can display our application. If we did not append the container to the body of our <code class="highlighter-rouge">index.html</code> then our Roguelike game will <strong>never</strong> display.</p>
+
+<p><em>_Note since we destructure we do not have to write <code class="highlighter-rouge">let display = new ROT.Display(...);</code> instead we simply write <code class="highlighter-rouge">let display = new Display(...);</code>_</em></p>
+
+<h2 id="loops">Looping and Printing in Color</h2>
+
+<p>Below appending our display value into the DOM, we will now finally print our message to the screen. How exciting, 6 minutes into this article and we finally get to the part that matters. 😳</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let foreground, background, colors, x;
+for (let i = 0; i &lt; 15; i++) {
+  x = i * 20;
+  foreground = Color.toRGB([255 - x, 255 - x, 255 - x]);
+  background = Color.toRGB([x, x, x]);
+  colors = "%c{" + foreground + "}%b{" + background + "}";
+  display.drawText(2, i, colors + "Hello, Rogue!");
+}
+</code></pre></div></div>
+
+<p>First we start off by initializing the <code class="highlighter-rouge">foreground</code>, <code class="highlighter-rouge">background</code>, <code class="highlighter-rouge">colors</code>, and <code class="highlighter-rouge">x</code> value. Currently if you tried accessing these values immediately after the first line, you’ll get a not defined value, this is because we haven’t assigned the value to anything yet, we simply initialized it. The reason behind this is because we do not want to continuously initialize the values within the loop, each time the loop is called if we had an initialization statement within the loop, we’ll constantly be re-initializing the code, which is a waste of memory.</p>
+
+<p>The <a href="https://www.w3schools.com/js/js_loop_for.asp" target="_blank">for loop</a> simply just loops everything inside the curly braces 15 times.</p>
+
+<p>The following lines where we set <code class="highlighter-rouge">foreground</code> and <code class="highlighter-rouge">background</code> involves RGB calculations which revolve around a Red Green Blue color system. The idea is the foreground will start light, with RGB values of 255,255,255, and the background starts off dark, with a RGB value of 0,0,0. As the program loops over, the values slowly decrease for the foreground, meaning it gets darker over each iteration, while the inverse is true for the background, it gets lighter over each iteration.</p>
+
+<p>Next we set these values to a <code class="highlighter-rouge">colors</code> string, which colors our text according to the specified foreground and background.</p>
+
+<p>Finally, and the most important aspect of our code, we finally use <code class="highlighter-rouge">display.drawText()</code> to write to the screen. This function should be fairly self-explanatory, it draws text to the display, in this case, we are drawing the string ‘Hello, Rogue’ with varying colors to the display.</p>
+
+<h1 id="results">Results</h1>
+
+<p>And finally, visiting the browser we can see our ‘Hello, World’ being displayed. (Note yours should say ‘Hello, Rogue’)</p>
+
+<p><img src="/assets/images/blog/roguelikedev/part-1-hello-rogue.png" alt="Making your own Roguelike in JavaScript - Part 1" /></p>
+
+<h1 id="full_code">Full Code</h1>
+
+<h4 id="indexhtml">index.html</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;title&gt;</span>jsroguelike - 2019<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;h1&gt;</span>JavaScript Roguelike<span class="nt">&lt;/h1&gt;</span>
+	<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"module"</span> <span class="na">src=</span><span class="s">"assets/main.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<h4 id="assetsmainjs">assets/main.js</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { Color, Display } from "../lib/index.js";
+
+let options = {
+  width: 80,
+  height: 20
+};
+
+let display = new Display(options);
+document.body.append(display.getContainer());
+
+let foreground, background, colors, x;
+for (let i = 0; i &lt; 15; i++) {
+  x = i * 20;
+  foreground = Color.toRGB([255 - x, 255 - x, 255 - x]);
+
+  background = Color.toRGB([x, x, x]);
+
+  colors = "%c{" + foreground + "}%b{" + background + "}";
+
+  display.drawText(2, i, colors + "Hello, Rogue!");
+}
+
+</code></pre></div></div>
+
+                
+			</article>
+			
+			<!-- Tags -->
+			<div class="mb-4">
+				<span class="taglist">
+				
+				  <a class="sscroll btn btn-light btn-sm font-weight-bold" href="/tags.html#javascript">javascript</a>
+				
+				  <a class="sscroll btn btn-light btn-sm font-weight-bold" href="/tags.html#roguelike">roguelike</a>
+				
+				  <a class="sscroll btn btn-light btn-sm font-weight-bold" href="/tags.html#rot.js">rot.js</a>
+				
+				  <a class="sscroll btn btn-light btn-sm font-weight-bold" href="/tags.html#programming">programming</a>
+				
+				  <a class="sscroll btn btn-light btn-sm font-weight-bold" href="/tags.html#featured">featured</a>
+				
+				</span>
+			</div>
+ 
+            <!-- Mailchimp Subscribe Form -->
             
-        
-        
-        
-          
-         
-            <div class="mb-5 d-flex justify-content-between main-loop-card">
-<div class="pr-3">
-	<h2 class="mb-1 h4 font-weight-bold">
-	<a class="text-dark" href="/about-me/">About Me</a>
-	</h2>
-	<p class="excerpt">
-	   Audio Engineer, Software Engineer, and Linux Enthusiast.
-	</p>
-	<small class="d-block text-muted">
-		In <span class="catlist">
-		
-		<a class="text-capitalize text-muted smoothscroll" href="/categories.html#about">About</a><span class="sep">, </span>
-		
-		<a class="text-capitalize text-muted smoothscroll" href="/categories.html#me">Me</a><span class="sep">, </span>
-		
-		</span>
-	</small>
-	<small class="text-muted">
-		Jan 01, 2019
-	</small>
-</div>
-
-	<div class="col-md-3 pr-0 text-right">
-	<a href="/about-me/">
-	<img class="w-100" src="/assets/images/iheartcoding.jpg" alt="About Me">
-	</a>
-	</div>
-
-</div>
-          
-        
-        
-        
-        
-
-         
-        <h4 class="font-weight-bold spanborder text-capitalize" id="javascript"><span>javascript</span></h4>
+			<div class="border p-5 bg-lightblue">
+				<div class="row justify-content-between">
+					<div class="col-md-6 mb-2 mb-md-0">
+						<h5 class="font-weight-bold">Join Newsletter</h5>
+						 Get the latest news right in your inbox. We never spam!
+					</div>
+					<div class="col-md-6">
+						<div class="row">
+                            <form action="" method="post" name="mc-embedded-subscribe-form" class="wj-contact-form validate w-100" target="_blank" novalidate>
+                            <div class="mc-field-group">
+							
+								<input type="email" placeholder="Enter e-mail address" name="EMAIL" class="required email form-control w-100" id="mce-EMAIL" autocomplete="on" required>
+							
+							
+								<button type="submit" value="Subscribe" name="subscribe" class="heart btn btn-success btn-block w-100 mt-2">Subscribe</button>
+							
+                            </div>
+                            </form>
+						</div>
+					</div>
+				</div>
+			</div>
             
-        
-        
-        
-          
-         
-            <div class="mb-5 d-flex justify-content-between main-loop-card">
-<div class="pr-3">
-	<h2 class="mb-1 h4 font-weight-bold">
-	<a class="text-dark" href="/building-a-roguelike-in-js-part1/">Building a Roguelike in JavaScript 2019 - part 1</a>
-	</h2>
-	<p class="excerpt">
-	   Hello, Rogue
-	</p>
-	<small class="d-block text-muted">
-		In <span class="catlist">
-		
-		<a class="text-capitalize text-muted smoothscroll" href="/categories.html#javascript">javascript</a><span class="sep">, </span>
-		
-		<a class="text-capitalize text-muted smoothscroll" href="/categories.html#programming">programming</a><span class="sep">, </span>
-		
-		</span>
-	</small>
-	<small class="text-muted">
-		Jun 25, 2019
-	</small>
-</div>
-
-	<div class="col-md-3 pr-0 text-right">
-	<a href="/building-a-roguelike-in-js-part1/">
-	<img class="w-100" src="/assets/images/blog/roguelikedev/roguelikedev.png" alt="Building a Roguelike in JavaScript 2019 - part 1">
-	</a>
-	</div>
-
-</div>
-          
-        
-        
-        
-          
-         
-            <div class="mb-5 d-flex justify-content-between main-loop-card">
-<div class="pr-3">
-	<h2 class="mb-1 h4 font-weight-bold">
-	<a class="text-dark" href="/building-a-roguelike-in-js-part0/">Building a Roguelike in Javascript 2019 - part 0</a>
-	</h2>
-	<p class="excerpt">
-	   What is a Roguelike?
-	</p>
-	<small class="d-block text-muted">
-		In <span class="catlist">
-		
-		<a class="text-capitalize text-muted smoothscroll" href="/categories.html#javascript">javascript</a><span class="sep">, </span>
-		
-		<a class="text-capitalize text-muted smoothscroll" href="/categories.html#programming">programming</a><span class="sep">, </span>
-		
-		</span>
-	</small>
-	<small class="text-muted">
-		Jun 15, 2019
-	</small>
-</div>
-
-	<div class="col-md-3 pr-0 text-right">
-	<a href="/building-a-roguelike-in-js-part0/">
-	<img class="w-100" src="/assets/images/blog/roguelikedev/roguelikedev.png" alt="Building a Roguelike in Javascript 2019 - part 0">
-	</a>
-	</div>
-
-</div>
-          
-        
-        
-        
-        
-
-         
-        <h4 class="font-weight-bold spanborder text-capitalize" id="programming"><span>programming</span></h4>
             
-        
-        
-        
-          
-         
-            <div class="mb-5 d-flex justify-content-between main-loop-card">
-<div class="pr-3">
-	<h2 class="mb-1 h4 font-weight-bold">
-	<a class="text-dark" href="/building-a-roguelike-in-js-part1/">Building a Roguelike in JavaScript 2019 - part 1</a>
-	</h2>
-	<p class="excerpt">
-	   Hello, Rogue
-	</p>
-	<small class="d-block text-muted">
-		In <span class="catlist">
-		
-		<a class="text-capitalize text-muted smoothscroll" href="/categories.html#javascript">javascript</a><span class="sep">, </span>
-		
-		<a class="text-capitalize text-muted smoothscroll" href="/categories.html#programming">programming</a><span class="sep">, </span>
-		
-		</span>
-	</small>
-	<small class="text-muted">
-		Jun 25, 2019
-	</small>
-</div>
+            
+             <!-- Author Box -->
+                				
+				<div class="row mt-5">
+					<div class="col-md-2 align-self-center">
+                         
+                        <img class="rounded-circle" src="/assets/images/avatar1.jpg" alt="Edgar Montano" width="90"/>
+                         
+					</div>
+					<div class="col-md-10">		
+                        <h5 class="font-weight-bold">Written by Edgar Montano <span><a target="_blank" href="https://twitter.com/EngineerEdgar" class="btn btn-outline-success btn-sm btn-round ml-2">Follow</a></span></h5>
+						Audio Engineer, Software Engineer, and Linux Enthusiast.					
+					</div>
+				</div>				
+                
+            
+            <!-- Comments -->
+            
+                <!--  Don't edit anything here. Set your disqus id in _config.yml -->
 
-	<div class="col-md-3 pr-0 text-right">
-	<a href="/building-a-roguelike-in-js-part1/">
-	<img class="w-100" src="/assets/images/blog/roguelikedev/roguelikedev.png" alt="Building a Roguelike in JavaScript 2019 - part 1">
-	</a>
+<div id="comments" class="mt-5">
+    <div id="disqus_thread">
+    </div>
+    <script type="text/javascript">
+        var disqus_shortname = ''; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>
+    Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
+</div>
+            
+            
+		</div>
+        
+        
 	</div>
-
-</div>
-          
-        
-        
-        
-          
-         
-            <div class="mb-5 d-flex justify-content-between main-loop-card">
-<div class="pr-3">
-	<h2 class="mb-1 h4 font-weight-bold">
-	<a class="text-dark" href="/building-a-roguelike-in-js-part0/">Building a Roguelike in Javascript 2019 - part 0</a>
-	</h2>
-	<p class="excerpt">
-	   What is a Roguelike?
-	</p>
-	<small class="d-block text-muted">
-		In <span class="catlist">
-		
-		<a class="text-capitalize text-muted smoothscroll" href="/categories.html#javascript">javascript</a><span class="sep">, </span>
-		
-		<a class="text-capitalize text-muted smoothscroll" href="/categories.html#programming">programming</a><span class="sep">, </span>
-		
-		</span>
-	</small>
-	<small class="text-muted">
-		Jun 15, 2019
-	</small>
 </div>
 
-	<div class="col-md-3 pr-0 text-right">
-	<a href="/building-a-roguelike-in-js-part0/">
-	<img class="w-100" src="/assets/images/blog/roguelikedev/roguelikedev.png" alt="Building a Roguelike in Javascript 2019 - part 0">
-	</a>
-	</div>
 
-</div>
+<!-- Aletbar Prev/Next -->
+<div class="alertbar">
+    <div class="container">
+        <div class="row prevnextlinks small font-weight-bold">
           
-        
-        
-        
-        
-
-        
-
+            <div class="col-md-6 rightborder pl-0">
+                <a class="text-dark" href="/building-a-roguelike-in-js-part0/"> <img height="30px" class="mr-1" src="/assets/images/blog/roguelikedev/roguelikedev.png">  Building a Roguelike in Javascript 2019 - part 0</a>
+            </div>
+          
+          
         </div>
-        
-            <div class="col-md-4">
-        <div class="sticky-top sticky-top-offset">
-    <h4 class="font-weight-bold spanborder"><span>Featured</span></h4>  
-    <ol class="list-featured">				
-                        
-            <li class="mb-4">
-            <span>
-                <h6 class="font-weight-bold">
-                    <a href="/building-a-roguelike-in-js-part1/" class="text-dark">Building a Roguelike in JavaScript 2019 - part 1</a>
-                </h6>
-                <span class="d-block text-muted">
-                    In <span class="catlist">
-                    
-                    <a class="text-capitalize text-muted smoothscroll" href="/categories.html#javascript">javascript</a><span class="sep">, </span>
-                    
-                    <a class="text-capitalize text-muted smoothscroll" href="/categories.html#programming">programming</a><span class="sep">, </span>
-                    
-                    </span>
-                </span>
-            </span>
-            </li>                
-                        
-            <li class="mb-4">
-            <span>
-                <h6 class="font-weight-bold">
-                    <a href="/building-a-roguelike-in-js-part0/" class="text-dark">Building a Roguelike in Javascript 2019 - part 0</a>
-                </h6>
-                <span class="d-block text-muted">
-                    In <span class="catlist">
-                    
-                    <a class="text-capitalize text-muted smoothscroll" href="/categories.html#javascript">javascript</a><span class="sep">, </span>
-                    
-                    <a class="text-capitalize text-muted smoothscroll" href="/categories.html#programming">programming</a><span class="sep">, </span>
-                    
-                    </span>
-                </span>
-            </span>
-            </li>                
-           
-    </ol>
-</div>     
-    </div>
-        
     </div>
 </div>
+
         </main>
 
         <!-- Scripts: popper, bootstrap, theme, lunr -->
